@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as echarts from 'echarts';
-
+import sendEmail from './components/sendEmail.jsx';
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -269,20 +269,38 @@ const App = () => {
           <h2 className="text-3xl font-bold text-center mb-16">문의하기</h2>
           <div className="max-w-2xl mx-auto">
             <div className="bg-white p-8 rounded-lg shadow-md">
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={sendEmail}>
                 <div>
                   <label className="block text-gray-700 mb-2">이름</label>
-                  <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input
+                    type="text"
+                    name="user_name"
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
                 </div>
                 <div>
                   <label className="block text-gray-700 mb-2">이메일</label>
-                  <input type="email" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  <input
+                    type="email"
+                    name="user_email"
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
                 </div>
                 <div>
                   <label className="block text-gray-700 mb-2">메시지</label>
-                  <textarea className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
+                  <textarea
+                    name="message"
+                    rows="4"
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  ></textarea>
                 </div>
-                <button className="!rounded-button w-full bg-blue-600 text-white py-3 font-semibold hover:bg-blue-700 transition cursor-pointer whitespace-nowrap">
+                <button
+                  type="submit"
+                  className="!rounded-button w-full bg-blue-600 text-white py-3 font-semibold hover:bg-blue-700 transition cursor-pointer whitespace-nowrap"
+                >
                   보내기
                 </button>
               </form>
@@ -297,13 +315,12 @@ const App = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-xl font-bold mb-4">MediCall</h3>
-              <p className="text-gray-400">응급실 매칭의 새로운 기준</p>
+              <p className="text-gray-400">응급실 매칭의 새로운 솔루션</p>
             </div>
             <div>
               <h3 className="text-xl font-bold mb-4">연락처</h3>
-              <p className="text-gray-400">서울특별시 강남구 테헤란로 123</p>
-              <p className="text-gray-400">이메일: contact@medicall.kr</p>
-              <p className="text-gray-400">전화: 02-1234-5678</p>
+              <p className="text-gray-400">서울특별시 광진구 능동로 120</p>
+              <p className="text-gray-400">이메일: medicall.developer@gmail.com</p>
             </div>
             <div>
               <h3 className="text-xl font-bold mb-4">소셜 미디어</h3>
