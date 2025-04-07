@@ -754,7 +754,7 @@ const App = () => {
                 우리의 목표를 담고 있습니다.
               </p>
               <div className="flex space-x-4">
-                <a
+                {/* <a
                   href="#"
                   className="text-gray-300 hover:text-white transition-colors cursor-pointer"
                 >
@@ -777,7 +777,7 @@ const App = () => {
                   className="text-gray-300 hover:text-white transition-colors cursor-pointer"
                 >
                   <i className="fab fa-linkedin-in"></i>
-                </a>
+                </a> */}
               </div>
             </div>
             <div>
