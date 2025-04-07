@@ -12,8 +12,36 @@ const App = () => {
   const [activeTab, setActiveTab] = useState("home");
   const swiperRef = useRef(null);
 
+  const showPreparationModal = (message = "아직 준비중입니다. 곧 서비스가 시작될 예정입니다.") => {
+    const modal = document.createElement("div");
+    modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+    modal.innerHTML = `
+      <div class="bg-white text-gray-800 rounded-xl p-6 max-w-md mx-auto shadow-xl">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold">알림</h3>
+          <button class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p class="mb-6">${message}</p>
+        <div class="flex justify-end">
+          <button class="bg-red-500 text-white px-4 py-2 rounded-full font-semibold !rounded-button whitespace-nowrap">
+            확인
+          </button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    const closeButtons = modal.querySelectorAll("button");
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        document.body.removeChild(modal);
+      });
+    });
+  };
+
   useEffect(() => {
-    // Initialize Swiper
     const swiperOptions = {
       modules: [Pagination, Navigation, Autoplay],
       slidesPerView: 1,
@@ -50,7 +78,6 @@ const App = () => {
     };
 
     if (document.querySelector(".app-screens-swiper")) {
-      // Use the imported Swiper constructor instead of window.Swiper
       swiperRef.current = new Swiper(
         ".app-screens-swiper",
         swiperOptions,
@@ -125,7 +152,9 @@ const App = () => {
             </button>
           </div>
           <div className="hidden md:block">
-            <button className="bg-red-500 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:bg-red-600 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
+            <button 
+              onClick={() => showPreparationModal("아직 준비중입니다. 곧 응급 출동 서비스가 시작될 예정입니다.")}
+              className="bg-red-500 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:bg-red-600 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
               긴급 출동 요청
             </button>
           </div>
@@ -169,7 +198,9 @@ const App = () => {
               >
                 문의하기
               </a>
-              <button className="bg-red-500 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:bg-red-600 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
+              <button 
+                onClick={() => showPreparationModal("아직 준비중입니다. 곧 응급 출동 서비스가 시작될 예정입니다.")}
+                className="bg-red-500 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:bg-red-600 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
                 긴급 출동 요청
               </button>
             </div>
@@ -199,10 +230,14 @@ const App = () => {
               골든타임을 놓치지 않는 실시간 응급실 매칭 서비스
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-white text-red-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
+              <button 
+                onClick={() => showPreparationModal("아직 준비중입니다. 곧 앱이 출시될 예정입니다.")}
+                className="bg-white text-red-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
                 앱 다운로드
               </button>
-              <button className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-red-500 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
+              <button 
+                onClick={() => showPreparationModal("서비스 준비 중입니다. 아래로 스크롤하여 더 자세한 정보를 확인하세요.")}
+                className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-red-500 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
                 자세히 알아보기
               </button>
             </div>
@@ -671,70 +706,14 @@ const App = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
             <button
-              onClick={() => {
-                const modal = document.createElement("div");
-                modal.className =
-                  "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
-                modal.innerHTML = `
-<div class="bg-white text-gray-800 rounded-xl p-6 max-w-md mx-auto shadow-xl">
-<div class="flex justify-between items-center mb-4">
-<h3 class="text-xl font-semibold">알림</h3>
-<button class="text-gray-500 hover:text-gray-700">
-<i class="fas fa-times"></i>
-</button>
-</div>
-<p class="mb-6">아직 준비중입니다. 곧 App Store에 출시될 예정입니다.</p>
-<div class="flex justify-end">
-<button class="bg-red-500 text-white px-4 py-2 rounded-full font-semibold !rounded-button whitespace-nowrap">
-확인
-</button>
-</div>
-</div>
-`;
-                document.body.appendChild(modal);
-                // 모달 닫기 이벤트 추가
-                const closeButtons = modal.querySelectorAll("button");
-                closeButtons.forEach((button) => {
-                  button.addEventListener("click", () => {
-                    document.body.removeChild(modal);
-                  });
-                });
-              }}
+              onClick={() => showPreparationModal("아직 준비중입니다. 곧 App Store에 출시될 예정입니다.")}
               className="bg-white text-red-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition-colors flex items-center justify-center !rounded-button whitespace-nowrap cursor-pointer"
             >
               <i className="fab fa-apple mr-2 text-xl"></i>
               App Store에서 다운로드
             </button>
             <button
-              onClick={() => {
-                const modal = document.createElement("div");
-                modal.className =
-                  "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
-                modal.innerHTML = `
-<div class="bg-white text-gray-800 rounded-xl p-6 max-w-md mx-auto shadow-xl">
-<div class="flex justify-between items-center mb-4">
-<h3 class="text-xl font-semibold">알림</h3>
-<button class="text-gray-500 hover:text-gray-700">
-<i class="fas fa-times"></i>
-</button>
-</div>
-<p class="mb-6">아직 준비중입니다. 곧 Google Play에 출시될 예정입니다.</p>
-<div class="flex justify-end">
-<button class="bg-red-500 text-white px-4 py-2 rounded-full font-semibold !rounded-button whitespace-nowrap">
-확인
-</button>
-</div>
-</div>
-`;
-                document.body.appendChild(modal);
-                // 모달 닫기 이벤트 추가
-                const closeButtons = modal.querySelectorAll("button");
-                closeButtons.forEach((button) => {
-                  button.addEventListener("click", () => {
-                    document.body.removeChild(modal);
-                  });
-                });
-              }}
+              onClick={() => showPreparationModal("아직 준비중입니다. 곧 Google Play에 출시될 예정입니다.")}
               className="bg-white text-red-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition-colors flex items-center justify-center !rounded-button whitespace-nowrap cursor-pointer"
             >
               <i className="fab fa-google-play mr-2 text-xl"></i>
@@ -750,35 +729,7 @@ const App = () => {
               동참해주세요.
             </p>
             <button
-              onClick={() => {
-                const modal = document.createElement("div");
-                modal.className =
-                  "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
-                modal.innerHTML = `
-<div class="bg-white text-gray-800 rounded-xl p-6 max-w-md mx-auto shadow-xl">
-<div class="flex justify-between items-center mb-4">
-<h3 class="text-xl font-semibold">알림</h3>
-<button class="text-gray-500 hover:text-gray-700">
-<i class="fas fa-times"></i>
-</button>
-</div>
-<p class="mb-6">아직 준비중입니다. 곧 서비스가 오픈될 예정입니다.</p>
-<div class="flex justify-end">
-<button class="bg-red-500 text-white px-4 py-2 rounded-full font-semibold !rounded-button whitespace-nowrap">
-확인
-</button>
-</div>
-</div>
-`;
-                document.body.appendChild(modal);
-                // 모달 닫기 이벤트 추가
-                const closeButtons = modal.querySelectorAll("button");
-                closeButtons.forEach((button) => {
-                  button.addEventListener("click", () => {
-                    document.body.removeChild(modal);
-                  });
-                });
-              }}
+              onClick={() => showPreparationModal("아직 준비중입니다. 곧 서비스가 오픈될 예정입니다.")}
               className="bg-white text-red-500 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transition-colors !rounded-button whitespace-nowrap cursor-pointer"
             >
               파트너 등록 신청하기
@@ -875,15 +826,18 @@ const App = () => {
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <i className="fas fa-map-marker-alt mt-1 mr-3"></i>
-                  <span>서울특별시 강남구 테헤란로 123, 메디콜타워 8층</span>
+                  <span>서울특별시 광진구 능동로 120 (화양동) 공학관</span>
                 </li>
-                <li className="flex items-start">
+                {/* 전화번호 */}
+                {/* <li className="flex items-start">
                   <i className="fas fa-phone-alt mt-1 mr-3"></i>
                   <span>02-123-4567</span>
-                </li>
+                </li> */}
                 <li className="flex items-start">
                   <i className="fas fa-envelope mt-1 mr-3"></i>
-                  <span>info@medicall.kr</span>
+                  <a href="mailto:medicall.developer@gmail.com" className="hover:text-white transition-colors">
+                    medicall.developer@gmail.com
+                  </a>
                 </li>
               </ul>
             </div>
